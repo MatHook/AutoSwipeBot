@@ -13,7 +13,7 @@ class TinderBot():
     def login(self):
         self.driver.get('https://tinder.com')
 
-        sleep(3)
+        sleep(2)
 
         fb_b_btn = bot.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[2]/div[2]/div/div/span/div[2]/button')
         fb_b_btn.click()
@@ -48,12 +48,13 @@ class TinderBot():
         like_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[3]')
         like_btn.click()
 
-    def auto_swipe(self):
+    def boost(self):
         boost_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[2]/div/div/button')
         boost_btn.click()
-        sleep(1.5)
-        close_btn = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
+        close_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
         close_btn.click()
+
+    def auto_swipe(self):
         while True:
             sleep(0.1)
             try:
@@ -63,8 +64,9 @@ class TinderBot():
 
     #closing desktop popup 
     def close_noninter_popup(self):
-        noninter_btn = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+        noninter_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
         noninter_btn.click()
 
 bot = TinderBot()
 bot.login()
+bot.auto_swipe()
