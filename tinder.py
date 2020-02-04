@@ -71,12 +71,20 @@ class TinderBot():
                 self.i += 1
                 
             except Exception:
-                self.close_noninter_popup()
+                try:
+                    self.close_noninter_popup()
+                except Exception:
+                    self.close_match_popup()
 
     #closing desktop popup 
     def close_noninter_popup(self):
         noninter_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
         noninter_btn.click()
+
+    #closing match popup
+    def close_match_popup(self):
+        match_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/a')
+        match_btn.click()
 
 bot = TinderBot()
 bot.login()
