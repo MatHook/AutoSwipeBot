@@ -61,7 +61,7 @@ class TinderBot():
     def auto_swipe(self):
         self.i = 0
         while True:
-            sleep(1)
+            sleep(0.1)
             try:
                 if (self.i != 25):
                     self.like()
