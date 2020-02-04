@@ -48,6 +48,10 @@ class TinderBot():
         like_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[3]')
         like_btn.click()
 
+    def dislike(self):
+        dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[1]')
+        dislike_btn.click()
+
     def boost(self):
         boost_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[2]/div/div/button')
         boost_btn.click()
@@ -55,10 +59,17 @@ class TinderBot():
         close_btn.click()
 
     def auto_swipe(self):
+        self.i = 0
         while True:
-            sleep(0.1)
+            sleep(1)
             try:
-                self.like()
+                if (self.i != 25):
+                    self.like()
+                else:
+                    self.dislike()
+                    self.i = 0
+                self.i += 1
+                
             except Exception:
                 self.close_noninter_popup()
 
@@ -69,4 +80,4 @@ class TinderBot():
 
 bot = TinderBot()
 bot.login()
-bot.auto_swipe()
+#bot.auto_swipe()
