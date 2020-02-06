@@ -55,40 +55,48 @@ class TinderBot():
     def superlike(self):
         superlike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[2]')
         superlike_btn.click()
-        sleep(0.5)
-        close_superlike_popup_btn = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
-        close_superlike_popup_btn.click()
+        try:
+            sleep(0.5)
+            close_superlike_popup_btn = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
+            close_superlike_popup_btn.click()
+        except Exception: pass
 
 
     def boost(self):
         boost_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[2]/div/div/button')
         boost_btn.click()
-        sleep(0.5)
-        close_boost_popup_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
-        close_boost_popup_btn.click()
+        try:
+            sleep(0.5)
+            close_boost_popup_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
+            close_boost_popup_btn.click()
+        except Exception: pass
 
     def auto_swipe(self):
         from random import random
-        self.boost()
-        while True:
-            sleep(1)
-            try:
-                rand = random()
-                if rand < .7:
-                    self.like()
-                    print('Chance of like: {}'.format(rand))
-                elif rand >= .1 and rand <= .11:
-                    self.superlike()
-                    print('Chance of SUPERLIKE: {}'.format(rand))
-                else:
-                    self.dislike()
-                    print('Chance of dislike: {}'.format(rand))
-
-            except Exception:
+        sleep(5)
+        try:
+            self.boost()
+            while True:
+                sleep(1)
                 try:
-                    self.close_noninter_popup()
+                    rand = random()
+                    if rand >= .1 and rand <= .15:
+                        self.superlike()
+                        print('Chance of SUPERLIKE: {}|'.format(rand))
+                    elif rand < .7:
+                        self.like()
+                        print('Chance of like: {}|'.format(rand))
+                    else:
+                        self.dislike()
+                        print('Chance of dislike: {}|'.format(rand))
+
                 except Exception:
-                    self.close_match_popup()
+                    try:
+                        self.close_noninter_popup()
+                    except Exception:
+                        self.close_match_popup()
+        except Exception:
+            print('Not finding profiles or other problem.')
 
     #closing desktop popup 
     def close_noninter_popup(self):
@@ -102,4 +110,4 @@ class TinderBot():
 
 bot = TinderBot()
 bot.login()
-#bot.auto_swipe()
+bot.auto_swipe()
