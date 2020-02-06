@@ -52,24 +52,38 @@ class TinderBot():
         dislike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[1]')
         dislike_btn.click()
 
+    def superlike(self):
+        superlike_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/button[2]')
+        superlike_btn.click()
+        sleep(0.5)
+        close_superlike_popup_btn = bot.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
+        close_superlike_popup_btn.click()
+
+
     def boost(self):
         boost_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[2]/div/div/button')
         boost_btn.click()
-        close_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
-        close_btn.click()
+        sleep(0.5)
+        close_boost_popup_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
+        close_boost_popup_btn.click()
 
     def auto_swipe(self):
-        self.i = 0
+        from random import random
+        self.boost()
         while True:
-            sleep(0.1)
+            sleep(1)
             try:
-                if (self.i != 25):
+                rand = random()
+                if rand < .7:
                     self.like()
+                    print('Chance of like: {}'.format(rand))
+                elif rand >= .1 and rand <= .11:
+                    self.superlike()
+                    print('Chance of SUPERLIKE: {}'.format(rand))
                 else:
                     self.dislike()
-                    self.i = 0
-                self.i += 1
-                
+                    print('Chance of dislike: {}'.format(rand))
+
             except Exception:
                 try:
                     self.close_noninter_popup()
