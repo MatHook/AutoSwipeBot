@@ -66,35 +66,37 @@ class TinderBot():
         boost_btn = self.driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[2]/div/div/button')
         boost_btn.click()
         try:
-            sleep(0.5)
+            sleep(1)
             close_boost_popup_btn = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
             close_boost_popup_btn.click()
         except Exception: pass
 
     def auto_swipe(self):
-        from random import random
+        from random import random, randint
+        i = 1
         sleep(5)
         try:
             self.boost()
             while True:
-                sleep(1)
+                time_rand = randint(1, 3)
+                sleep(time_rand)
                 try:
                     rand = random()
                     if rand >= .1 and rand <= .15:
                         self.superlike()
-                        print('Chance of SUPERLIKE: {}|'.format(rand))
+                        print('Chance of SUPERLIKE: {0}| Iteration: {1}'.format(rand, i))
                     elif rand < .7:
                         self.like()
-                        print('Chance of like: {}|'.format(rand))
+                        print('Chance of like: {0}| Iteration: {1}|'.format(rand, i))
                     else:
                         self.dislike()
-                        print('Chance of dislike: {}|'.format(rand))
-
+                        print('Chance of dislike: {0}| Iteration: {1}|'.format(rand, i))
                 except Exception:
                     try:
                         self.close_noninter_popup()
                     except Exception:
                         self.close_match_popup()
+                i += 1
         except Exception:
             print('Not finding profiles or other problem.')
 
