@@ -1,5 +1,8 @@
 # AutoSwipeBot
 Bot for auto swipe in Tinder.
+Download Chromedriver from https://chromedriver.chromium.org/downloads
+Then ```mv ~/Downloads/chromedriver /usr/local/bin```
+Insert your FB data in secrets.py
 To start use ```python -i tinder.py```
 
 ## Instuctions 
